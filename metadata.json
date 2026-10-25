@@ -1,0 +1,6 @@
+{
+  "name": "Time-Aware Credit Card Fraud Detection Platform",
+  "description": "Time-aware, cost-sensitive credit card fraud detection system featuring confidence-bounded SHAP explanation drift monitoring, delayed-label evaluation, and review-capacity simulation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

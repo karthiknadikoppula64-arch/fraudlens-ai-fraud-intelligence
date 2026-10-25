@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Executive Overview · FraudLens | AI Fraud Intelligence</title>
+    <meta name="color-scheme" content="dark light" />
+    <script>
+      // Apply the persisted / system theme before first paint to avoid a flash.
+      (function () {
+        var dark = true;
+        try {
+          var s = localStorage.getItem('fraudlens_theme') || localStorage.getItem('chronosentry_theme');
+          dark = s ? s === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+        } catch (e) {}
+        if (dark) document.documentElement.classList.add('dark');
+      })();
+    </script>
+    <meta name="description" content="AI Fraud Intelligence · FraudLens: Intelligent Fraud Detection. Explainable Decisions. Real-Time Protection. Enterprise-grade fraud intelligence powered by time-aware, cost-sensitive machine learning." />
+    <meta property="og:title" content="AI Fraud Intelligence · FraudLens" />
+    <meta property="og:description" content="Intelligent Fraud Detection. Explainable Decisions. Real-Time Protection." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

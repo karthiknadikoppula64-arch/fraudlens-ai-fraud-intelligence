@@ -1,0 +1,180 @@
+@import "tailwindcss";
+/* The QA scripts contain class-name strings in selectors; keep them out of the build. */
+@source not "../qa";
+
+/* Class-based dark mode: `dark:` utilities apply when <html class="dark"> */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ------------------------------------------------------------------ Design tokens */
+@theme {
+  --color-midnight: #0B1220;
+  --color-navy: #0F192C;
+  --color-navy-2: #132238;
+  --color-deep: #173B70;
+  --color-electric: #3988FF;
+  --color-legit: #10B981;
+  --color-suspicious: #F59E0B;
+  --color-fraud: #E5484D;
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+:root {
+  --color-midnight: #0B1220;
+  --color-deep-blue: #173B70;
+  --color-electric: #3988FF;
+  --color-fraud-red: #E5484D;
+  --color-legit-green: #10B981;
+
+  /* Semantic surface tokens – light theme */
+  --cs-bg: #F5F7FB;
+  --cs-surface: #FFFFFF;
+  --cs-surface-2: #F1F5F9;
+  --cs-border: #E2E8F0;
+  --cs-border-strong: #CBD5E1;
+  --cs-text: #0B1220;
+  --cs-muted: #475569;
+  --cs-subtle: #5B6B82;
+  --cs-accent-text: #1D5BD8; /* AA on white */
+  --cs-amber-text: #B45309;  /* 5.0:1 on white */
+  --cs-green-text: #047857;  /* 5.5:1 on white */
+  /* Filled buttons with white text: #3988FF gives only 3.4:1, this deeper shade of the same blue gives 5.9:1. */
+  --cs-primary-fill: #1D5BD8;
+  --cs-primary-fill-hover: #1A4FBF;
+  --cs-ring: #3988FF;
+  --cs-shadow: 0 1px 2px rgba(11, 18, 32, 0.06);
+}
+
+html.dark {
+  --cs-bg: #0B1220;
+  --cs-surface: #0F192C;
+  --cs-surface-2: #0B1220;
+  --cs-border: rgba(23, 59, 112, 0.7);
+  --cs-border-strong: #173B70;
+  --cs-text: #F1F5F9;
+  --cs-muted: #A3B1C6;
+  --cs-subtle: #8494AB;
+  --cs-accent-text: #6AA8FF; /* AA on navy */
+  --cs-amber-text: #FBBF24;
+  --cs-green-text: #34D399;
+  --cs-shadow: 0 4px 16px rgba(0, 0, 0, 0.28);
+}
+
+html.dark {
+  background-color: #0B1220;
+  color-scheme: dark;
+}
+
+html:not(.dark) {
+  background-color: #F5F7FB;
+  color-scheme: light;
+}
+
+body {
+  background-color: var(--cs-bg);
+  color: var(--cs-text);
+}
+
+/* ------------------------------------------------------------------ Semantic components */
+@layer components {
+  .cs-card {
+    background-color: var(--cs-surface);
+    border: 1px solid var(--cs-border);
+    border-radius: 1rem;
+    box-shadow: var(--cs-shadow);
+  }
+  .cs-inset {
+    background-color: var(--cs-surface-2);
+    border: 1px solid var(--cs-border);
+    border-radius: 0.75rem;
+  }
+  .cs-text { color: var(--cs-text); }
+  .cs-muted { color: var(--cs-muted); }
+  .cs-subtle { color: var(--cs-subtle); }
+  .cs-accent { color: var(--cs-accent-text); }
+  .cs-divider { border-color: var(--cs-border); }
+
+  .cs-input {
+    background-color: var(--cs-surface);
+    border: 1px solid var(--cs-border-strong);
+    color: var(--cs-text);
+    border-radius: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.75rem;
+    transition: border-color 120ms ease, box-shadow 120ms ease;
+  }
+  .cs-input::placeholder { color: var(--cs-subtle); }
+  .cs-input:focus { outline: none; border-color: var(--cs-ring); box-shadow: 0 0 0 3px rgba(57, 136, 255, 0.25); }
+
+  .cs-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    border-radius: 0.75rem;
+    padding: 0.5rem 0.9rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease;
+    cursor: pointer;
+  }
+  .cs-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .cs-btn-primary { background-color: var(--cs-primary-fill); color: #fff; }
+  .cs-btn-primary:hover:not(:disabled) { background-color: var(--cs-primary-fill-hover); }
+  .cs-btn-secondary { background-color: var(--cs-surface); color: var(--cs-text); border: 1px solid var(--cs-border-strong); }
+  .cs-btn-secondary:hover:not(:disabled) { border-color: #3988FF; }
+
+  .cs-seg { display: inline-flex; padding: 0.25rem; border-radius: 0.75rem; background-color: var(--cs-surface-2); border: 1px solid var(--cs-border); gap: 0.125rem; }
+  .cs-seg > button { padding: 0.35rem 0.7rem; border-radius: 0.55rem; font-size: 0.75rem; color: var(--cs-muted); transition: background-color 120ms, color 120ms; }
+  .cs-seg > button:hover { color: var(--cs-text); }
+  .cs-seg > button[aria-pressed="true"] { background-color: var(--cs-primary-fill); color: #fff; font-weight: 600; }
+
+  .cs-th { color: var(--cs-muted); background-color: var(--cs-surface-2); }
+  .cs-row:hover { background-color: var(--cs-surface-2); }
+}
+
+/* ------------------------------------------------------------------ Chart text (SVG)
+   Axis ticks and reference-line labels inherit theme-aware colours with AA contrast. CSS `fill`
+   overrides the presentation attribute recharts sets, so series colours stay unchanged. */
+.recharts-cartesian-axis-tick-value { fill: var(--cs-subtle); }
+.cs-svg-blue, .cs-svg-blue text { fill: var(--cs-accent-text); }
+.cs-svg-amber, .cs-svg-amber text { fill: var(--cs-amber-text); }
+.cs-svg-green, .cs-svg-green text { fill: var(--cs-green-text); }
+.cs-svg-subtle { fill: var(--cs-subtle); }
+
+/* ------------------------------------------------------------------ Touch targets
+   On small screens every button, nav link and form control is at least 44 × 44 px. */
+@media (max-width: 767px), (pointer: coarse) {
+  .cs-btn,
+  .cs-seg > button,
+  #app-sidebar nav a,
+  header button,
+  main button,
+  [role="dialog"] button,
+  .cs-input,
+  select {
+    min-height: 44px;
+  }
+  .cs-btn, .cs-seg > button { align-items: center; }
+  /* Icon-only buttons are square. */
+  button[aria-label]:not(:has(span:not(.sr-only))) { min-width: 44px; justify-content: center; }
+  #app-sidebar nav a { display: flex; align-items: center; }
+  header .cs-btn { min-width: 44px; justify-content: center; }
+}
+
+/* Accessible focus ring */
+:focus-visible {
+  outline: 2px solid #3988FF;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* Sleek fintech scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+.dark ::-webkit-scrollbar-thumb { background: #173B70; }
+.dark ::-webkit-scrollbar-thumb:hover { background: #3988FF; }
